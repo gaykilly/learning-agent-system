@@ -1,0 +1,50 @@
+### 1. 查询历史记录（测试服务是否正常）
+GET http://localhost:8080/api/resource/history
+
+### 2. 生成教学大纲
+POST http://localhost:8080/api/resource/syllabus
+Content-Type: application/json
+
+{
+  "input": "Java编程基础"
+}
+
+### 3. 生成PPT大纲
+POST http://localhost:8080/api/resource/ppt
+Content-Type: application/json
+
+{
+  "input": "数据结构"
+}
+
+### 4. 生成练习题
+POST http://localhost:8080/api/resource/exercise
+Content-Type: application/json
+
+{
+  "input": "MySQL数据库"
+}
+
+### 5. 生成思维导图
+POST http://localhost:8080/api/resource/mindmap
+Content-Type: application/json
+
+{
+  "input": "计算机网络"
+}
+
+### 6. 生成复习提纲
+POST http://localhost:8080/api/resource/review
+Content-Type: application/json
+
+{
+  "input": "操作系统"
+}
+
+### 7. 下载PPT文件（会下载.pptx文件）
+POST http://localhost:8080/api/resource/ppt/download
+Content-Type: application/json
+
+{
+  "input": "人工智能"
+}
