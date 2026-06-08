@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地图测试</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map-container {
+            width: 100%;
+            height: 100vh;
+            background: #e8e8e8;
+        }
+    </style>
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=7bc6ced257efbae22c2c81855f348a0c&plugin=AMap.Scale,AMap.ToolBar,AMap.TileLayer"></script>
+</head>
+<body>
+    <div id="map-container"></div>
+    <script>
+        console.log('Testing map initialization...');
+        console.log('AMap available:', typeof window.AMap);
+        
+        if (window.AMap) {
+            console.log('Creating map instance...');
+            try {
+                var map = new AMap.Map('map-container', {
+                    center: [116.40039, 39.90886],
+                    zoom: 14
+                });
+                console.log('Map created successfully!');
+                
+                // 添加控件
+                map.addControl(new AMap.Scale());
+                map.addControl(new AMap.ToolBar());
+                
+                console.log('Map controls added');
+            } catch (error) {
+                console.error('Error creating map:', error);
+                document.getElementById('map-container').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:red;">地图创建失败: ' + error.message + '</div>';
+            }
+        } else {
+            console.error('AMap is not available');
+            document.getElementById('map-container').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:red;">高德地图API加载失败</div>';
+        }
+    </script>
+</body>
+</html>

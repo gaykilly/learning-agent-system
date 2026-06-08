@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高德地图API测试</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        #test-container {
+            padding: 20px;
+        }
+        #map-container {
+            width: 100%;
+            height: 500px;
+            background: #e8e8e8;
+            margin-top: 20px;
+        }
+        .log {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f5f5f5;
+            border-left: 4px solid #4A90E2;
+        }
+        .error {
+            border-left-color: #f44336;
+            background: #ffebee;
+        }
+        .success {
+            border-left-color: #4CAF50;
+            background: #e8f5e9;
+        }
+    </style>
+</head>
+<body>
+    <div id="test-container">
+        <h1>高德地图API测试</h1>
+        <div id="status"></div>
+        <div id="map-container"></div>
+        <div id="logs"></div>
+    </div>
+    
+    <script>
+        function log(message, type = 'info') {
+            const logs = document.getElementById('logs');
+            const logDiv = document.createElement('div');
+            logDiv.className = `log ${type}`;
+            logDiv.textContent = new Date().toLocaleTimeString() + ': ' + message;
+            logs.appendChild(logDiv);
+            console.log(message);
+        }
+        
+        function updateStatus(message, type = 'info') {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.style.color = type === 'error' ? '#f44336' : type === 'success' ? '#4CAF50' : '#333';
+        }
+        
+        log('开始测试高德地图API加载...');
+        updateStatus('正在加载高德地图API...');
+        
+        // 动态加载高德地图API
+        function loadAMapAPI() {
+            log('创建脚本标签...');
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://webapi.amap.com/maps?v=2.0&key=7bc6ced257efbae22c2c81855f348a0c&plugin=AMap.Scale,AMap.ToolBar,AMap.TileLayer';
+            script.async = false;
+            
+            script.onload = function() {
+                log('高德地图API脚本加载成功', 'success');
+                log('AMap对象:', 'success');
+                log('AMap版本: ' + (window.AMap ? window.AMap.version : '未知'), 'success');
+                
+                if (window.AMap) {
+                    updateStatus('高德地图API加载成功', 'success');
+                    initMap();
+                } else {
+                    log('高德地图API加载失败：AMap对象未定义', 'error');
+                    updateStatus('高德地图API加载失败：AMap对象未定义', 'error');
+                }
+            };
+            
+            script.onerror = function() {
+                log('高德地图API脚本加载失败', 'error');
+                updateStatus('高德地图API脚本加载失败', 'error');
+            };
+            
+            log('添加脚本标签到页面...');
+            document.head.appendChild(script);
+            log('脚本标签已添加，等待加载...');
+        }
+        
+        function initMap() {
+            log('开始初始化地图...');
+            try {
+                const map = new AMap.Map('map-container', {
+                    center: [116.40039, 39.90886],
+                    zoom: 14
+                });
+                log('地图初始化成功', 'success');
+                updateStatus('地图初始化成功', 'success');
+                
+                // 添加控件
+                map.addControl(new AMap.Scale());
+                map.addControl(new AMap.ToolBar());
+                log('地图控件添加成功', 'success');
+                
+            } catch (error) {
+                log('地图初始化失败: ' + error.message, 'error');
+                updateStatus('地图初始化失败: ' + error.message, 'error');
+            }
+        }
+        
+        // 开始测试
+        loadAMapAPI();
+    </script>
+</body>
+</html>

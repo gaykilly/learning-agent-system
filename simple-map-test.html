@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单地图测试</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            width: 800px;
+            height: 600px;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+        }
+    </style>
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=7bc6ced257efbae22c2c81855f348a0c"></script>
+</head>
+<body>
+    <h1 style="text-align: center; margin-top: 20px;">高德地图测试</h1>
+    <div id="map"></div>
+    <script>
+        console.log('AMap:', window.AMap);
+        if (window.AMap) {
+            console.log('AMap version:', window.AMap.version);
+            var map = new AMap.Map('map', {
+                center: [116.404, 39.915],
+                zoom: 11
+            });
+            console.log('Map created:', map);
+        } else {
+            console.error('AMap not loaded');
+            document.getElementById('map').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:red;">高德地图API加载失败</div>';
+        }
+    </script>
+</body>
+</html>

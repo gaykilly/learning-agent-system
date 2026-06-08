@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico">
+    <title>管理系统</title>
+    
+    <!-- 高德地图安全密钥配置 -->
+    <script type="text/javascript">
+      window._AMapSecurityConfig = {
+        securityJsCode: 'e4b58870ebeba7f5f427361fb5f1276c'
+      }
+    </script>
+    <!-- 高德地图API -->
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=7bc6ced257efbae22c2c81855f348a0c"></script>
+    <!-- HLS.js 用于播放直播流 -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.4.12"></script>
+    <!-- flv.js 用于播放 FLV 格式直播流 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/flv.js/1.6.2/flv.min.js"></script>
+  </head>
+  <body>
+    <noscript>
+      <strong>请启用JavaScript以继续使用本系统。</strong>
+    </noscript>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
